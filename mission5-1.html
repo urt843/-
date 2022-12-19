@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mission_5-1</title>
+</head>
+<body>
+  <span style="font-size:30px;">電卓</span><br>
+    <input type="text" style="width:10.2%;padding:0.3%;" id="result">
+    
+    <div>
+      <input type="button" style="width:2.5%;padding:10px;" value="1" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="2" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="3" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="+" onclick="edit(this)">
+    </div>
+    <div>
+      <input type="button" style="width:2.5%;padding:10px;" value="4" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="5" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="6" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="-" onclick="edit(this)">
+    </div>
+    <div>
+      <input type="button" style="width:2.5%;padding:10px;" value="7" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="8" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="9" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="/" onclick="edit(this)">
+    </div>
+    <div>
+      <input type="button" style="width:2.5%;padding:10px;" value="0" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="." onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="*" onclick="edit(this)">
+      <input type="button" style="width:2.5%;padding:10px;" value="=" onclick="calc()">
+      <button onclick="c_click()"style="width:2.5%;padding:10px;">C</button>
+      <br><br>
+      ・*は掛け算、/は割り算<br>
+      ・Cで計算をリセット<br>
+    </div>
+<script>
+        var result = document.getElementById("result");
+    function edit(elem) {
+      result.value = result.value + elem.value;
+    }
+    function calc() {
+      if(is_ope_last())  result.value = result.value.slice(0, -1);
+
+  var temp = new Function("return " + result.value.replaceAll("×", "*").replaceAll("÷", "/"))();
+  if(temp == Infinity || Number.isNaN(temp)){
+    result.value = "Error";
+  }else{
+    result.value = temp;
+    is_calc = true;}
+    function is_ope_last(){
+      return ["+","-","×","÷"].includes(result.value.toString().slice(-1));
+    }
+  }
+   function c_click(){
+    result.value="";
+    is_calc=false;
+   }
+</script>
+</body>
+</html>
